@@ -60,7 +60,7 @@ C	5	3	0	3	0
 
 Note that not all the sequence will coalesce at this point. The parts of the haplotype that coalesce are indicated by the 3rd and 4th number. In this example, the loci that coalesce from node 4 into node 5 are indexed by the interval [0,2) i.e. loci 0 and 1, whereas the parts of the haplotype that coalesce from node 3 into node 5 are in the interval [0,3) i.e. loci 0, 1, and 2.
 
-The fifth number on the coalescence line denotes the number of mutations that are inferred to have happened along the branch connecting this node to the specified descendant. The locus of each mutation is then given by the subsequen numbers. In other words, if the 5th number is 0, it will not be followed by any other numbers (no mutations on this edge). If the 5th number is 1, it will be followed by a single number specifying the locus at which a mutation occurs. If the 5th number is 2, it will be followed by two numbers giving such indices, and so on. 
+The fifth number on the coalescence line denotes the number of mutations that are inferred to have happened along the branch connecting this node to the specified descendant. The locus of each mutation is then given by the subsequent numbers. In other words, if the 5th number is `0`, it will not be followed by any other numbers (no mutations on this edge). If the 5th number is `1`, it will be followed by a single number specifying the locus at which a mutation occurs. If the 5th number is `2`, it will be followed by two numbers giving such indices, and so on. 
 
 ###### `R` Recombination event
 Any number of lines starting with R may exist, which indicate recombination events. This is followed by 5 or more numbers interpreted in the same way as for a coalescence event.
@@ -128,7 +128,7 @@ The output also states that the line joining node 5 to node 4 only applies to lo
 ```
 From this we can infer that haplotype 0 has a mutation at position 0, haplotype 1 has a mutation at locus 2, haplotype 2 has a mutation at locus 1, and haplotype 3 has a mutation at loci 1 and 2.
 
-The final line in the file (initial letter `S`) states that node 8 (the root) is inferred to have the sequence `000`, hence all mutations are from `0`→`1`, and the haplotypes are
+The final line in the file (initial letter `S`) states that node 8 (the root) is inferred to have had the ancestral haplotype `000`, hence all mutations are from `0`→`1`. Imposing this haplotype at the root of the trees, and accumulating mutations down each tree produces leaf haplotypes as observed in the original input file
 
 ```
         Haplotype
@@ -138,4 +138,3 @@ Locus |  0 1 2 3
     1 |  0 0 1 1
     2 |  0 1 0 1
 ```
-which reconstructs the same data as in the original input file.
