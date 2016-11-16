@@ -51,23 +51,23 @@ A single line starting with `N` is followed by two integers giving the number of
 The following set of lines describe the ARG. Note that nodes in the ARG are indexed from 0...(_n_-1) for leaf nodes, with numbers from _n_ upwards used for internal ARG nodes.
 
 ###### `C` Coalescence event
-Any number of lines starting with `C` may exist, which indicate coalescence events. The initial `C` is followed by 5 or more tab-delimited integers. The first 4 integers represent the current node ID, a descendant node ID, and the half-closed genomic interval over which this coalescence applies. For instance, the lines
+Any number of lines starting with `C` may exist, which indicate branches that coalescence. The initial `C` is followed by 5 or more tab-delimited integers. The first 4 integers represent the current node ID, a descendant node ID, and the half-closed genomic interval over which this coalescence applies. In the normal case that 2 lineages coalesce, there will be a pair of coalescence lines, such as in the following example, which indicates that node 5 consists of a coalescence between nodes 4 and 3
 
 ```
 C	5	4	0	2	0
 C	5	3	0	3	0
 ```
 
-Indicate that node 5 consists of a coalescence between (some of) nodes 4 and 3. For node 4, the parts of the haplotype that coalesce at node 5 are those indexed by the interval [0,2) i.e. loci 0 and 1. For node 3, the parts of the haplotype that coalesce are in the interval [0,3) i.e. loci 0, 1, and 2.
+Note that not all the sequence will coalesce at this point. The parts of the haplotype that coalesce are indicated by the 3rd and 4th number. In this example, the loci that coalesce from node 4 into node 5 are indexed by the interval [0,2) i.e. loci 0 and 1, whereas the parts of the haplotype that coalesce from node 3 into node 5 are in the interval [0,3) i.e. loci 0, 1, and 2.
 
-The fifth number on the coalescence line denotes the number of mutations that 
+The fifth number on the coalescence line denotes the number of mutations that are inferred to have happened along the branch connecting this node to the specified descendant. The locus of each mutation is then given by the subsequen numbers. In other words, if the 5th number is 0, it will not be followed by any other numbers (no mutations on this edge). If the 5th number is 1, it will be followed by a single number specifying the locus at which a mutation occurs. If the 5th number is 2, it will be followed by two numbers giving such indices, and so on. 
 
-###### `R` __R__ecombination event
-Any number of lines starting with R may exist, which indicate recombination events. This is followed by 5 or 
+###### `R` Recombination event
+Any number of lines starting with R may exist, which indicate recombination events. This is followed by 5 or more numbers interpreted in the same way as for a coalescence event.
 
 ###Sequence specification
 
-###### `S` __S__equence at root
+###### `S` Sequence at root
 
 A single line starting with an `S` is followed by the ID of the deepest node in all trees (the root), then a sequence of _m_ characters giving the inferred haplotype at this root. This serves to completely define the ancestral locus history.
 
@@ -92,7 +92,7 @@ S	8	000
 
 showing that the random seed is 11 (line 1) and the number of haplotypes and number of loci is 4 and 3 respectively (line 2).
 
-The ARG indicated by the `R` and `C` records in the above file is shown by the diagram to the left below. Recombination nodes have been prefixed with R, coalescence events with C, and dots represent lines that visually cross, but do not intersect. The diagram to the right is the same but with mutations overlain: *0 represents a mutation at locus 0, *1 at locus 1, and *2 at locus 2
+The ARG indicated by the `R` and `C` records in the above file is shown by the diagram to the left below. Recombination nodes have been prefixed with R, coalescence events with C, and dots represent lines that visually cross, but do not intersect. The diagram to the right is the same but with mutations overlain: `*0` represents a mutation at locus 0, `*1` at locus 1, and `*2` at locus 2
 
 ```
        C8                  C8    
@@ -128,7 +128,7 @@ The output also states that the line joining node 5 to node 4 only applies to lo
 ```
 From this we can infer that haplotype 0 has a mutation at position 0, haplotype 1 has a mutation at locus 2, haplotype 2 has a mutation at locus 1, and haplotype 3 has a mutation at loci 1 and 2.
 
-The final line in the file (initial letter `S`) states that node 8 (the root) is inferred to have the sequence `000`, hence all mutations are from 0->1, and the haplotypes are
+The final line in the file (initial letter `S`) states that node 8 (the root) is inferred to have the sequence `000`, hence all mutations are from `0`→`1`, and the haplotypes are
 
 ```
         Haplotype
