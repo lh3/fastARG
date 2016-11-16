@@ -38,7 +38,7 @@ arg_data_t *arg_data_read(const char *fn)
 		// change scale
 		n[0] = n[1] = n[2] = n[3] = 0;
 		for (i = 0; i < ad->n; ++i) {
-			str->s[i] = (str->s[i] < '0' && str->s[i] > '2')? 3 : str->s[i] - '0';
+			str->s[i] = (str->s[i] < '0' || str->s[i] > '2')? 3 : str->s[i] - '0';
 			++n[(int)str->s[i]];
 		}
 		if (n[2] > 0) ad->is_phased = 0;
