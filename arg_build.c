@@ -756,7 +756,7 @@ void arg_build(arg_build_t *ab)
 	int cnt = 0;
 	while (kh_size(ab->S) > 1) {
 		if (cnt % 1000 == 0)
-			fprintf(stderr, "[arg_build] %d actions; %d sequences remained\n", cnt, (int)kh_size(ab->S));
+			fprintf(stderr, "[arg_build] %d actions; %d sequences remain\n", cnt, (int)kh_size(ab->S));
 		++cnt;
 		if (ab->flag & AB_FSHOW_SEQ) print_seq(ab);
 		if (kh_size(ab->C_set)) { // then coalesce
